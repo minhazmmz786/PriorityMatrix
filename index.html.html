@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priority Matrix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Priority Matrix</h1>
+            <p class="subtitle">Organize tasks by urgency and importance</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-btn" data-tab="tasks">Tasks</button>
+        </div>
+
+        <div id="dashboardTab" class="tab-content active">
+            <div class="dashboard">
+                <h2 class="dashboard-header">Task Analytics Dashboard</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Tasks</h3>
+                        <div class="stat-value" id="totalTasks">0</div>
+                        <div class="stat-label">Active tasks</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Completed Tasks</h3>
+                        <div class="stat-value" id="completedTasks">0</div>
+                        <div class="stat-label">Tasks finished</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Time</h3>
+                        <div class="stat-value" id="totalTime">0h 0m</div>
+                        <div class="stat-label">Time allocated</div>
+                    </div>
+                </div>
+
+                <div class="quadrant-stats">
+                    <div class="quadrant-stat q1">
+                        <h3>🔥 Do First</h3>
+                        <div class="stat-row">
+                            <span class="label">Total Tasks:</span>
+                            <span class="value" id="q1Tasks">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Completed:</span>
+                            <span class="value" id="q1Completed">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Time Allocated:</span>
+                            <span class="value" id="q1Time">0h 0m</span>
+                        </div>
+                    </div>
+
+                    <div class="quadrant-stat q2">
+                        <h3>📅 Schedule</h3>
+                        <div class="stat-row">
+                            <span class="label">Total Tasks:</span>
+                            <span class="value" id="q2Tasks">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Completed:</span>
+                            <span class="value" id="q2Completed">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Time Allocated:</span>
+                            <span class="value" id="q2Time">0h 0m</span>
+                        </div>
+                    </div>
+
+                    <div class="quadrant-stat q3">
+                        <h3>👥 Delegate</h3>
+                        <div class="stat-row">
+                            <span class="label">Total Tasks:</span>
+                            <span class="value" id="q3Tasks">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Completed:</span>
+                            <span class="value" id="q3Completed">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Time Allocated:</span>
+                            <span class="value" id="q3Time">0h 0m</span>
+                        </div>
+                    </div>
+
+                    <div class="quadrant-stat q4">
+                        <h3>🗑️ Eliminate</h3>
+                        <div class="stat-row">
+                            <span class="label">Total Tasks:</span>
+                            <span class="value" id="q4Tasks">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Completed:</span>
+                            <span class="value" id="q4Completed">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Time Allocated:</span>
+                            <span class="value" id="q4Time">0h 0m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tasksTab" class="tab-content">
+            <div class="input-section">
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Enter a new task..." />
+                    <button id="addTaskBtn">Add Task</button>
+                </div>
+            </div>
+
+            <div class="matrix">
+                <div class="quadrant q1" data-quadrant="urgent-important">
+                    <div class="quadrant-header">
+                        <div class="quadrant-icon">🔥</div>
+                        <div>
+                            <div class="quadrant-title">Do First</div>
+                            <div class="quadrant-subtitle">Urgent & Important</div>
+                        </div>
+                    </div>
+                    <div class="task-list" id="urgent-important"></div>
+                </div>
+
+                <div class="quadrant q2" data-quadrant="not-urgent-important">
+                    <div class="quadrant-header">
+                        <div class="quadrant-icon">📅</div>
+                        <div>
+                            <div class="quadrant-title">Schedule</div>
+                            <div class="quadrant-subtitle">Not Urgent but Important</div>
+                        </div>
+                    </div>
+                    <div class="task-list" id="not-urgent-important"></div>
+                </div>
+
+                <div class="quadrant q3" data-quadrant="urgent-not-important">
+                    <div class="quadrant-header">
+                        <div class="quadrant-icon">👥</div>
+                        <div>
+                            <div class="quadrant-title">Delegate</div>
+                            <div class="quadrant-subtitle">Urgent but Not Important</div>
+                        </div>
+                    </div>
+                    <div class="task-list" id="urgent-not-important"></div>
+                </div>
+
+                <div class="quadrant q4" data-quadrant="not-urgent-not-important">
+                    <div class="quadrant-header">
+                        <div class="quadrant-icon">🗑️</div>
+                        <div>
+                            <div class="quadrant-title">Eliminate</div>
+                            <div class="quadrant-subtitle">Not Urgent & Not Important</div>
+                        </div>
+                    </div>
+                    <div class="task-list" id="not-urgent-not-important"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="priorityModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-header">Create New Task</h2>
+            
+            <div class="time-input-section">
+                <label class="time-input-label">Set Time Duration</label>
+                <div class="time-inputs" id="timeInputsContainer">
+                    <div class="time-input-group">
+                        <label>Minutes</label>
+                        <input type="number" id="minutesInput" min="0" max="1440" value="5" />
+                    </div>
+                    <div class="time-input-group">
+                        <label>Seconds</label>
+                        <input type="number" id="secondsInput" min="0" max="59" value="0" />
+                    </div>
+                </div>
+                <div class="no-timer-checkbox">
+                    <input type="checkbox" id="noTimerCheckbox" />
+                    <label for="noTimerCheckbox">No timer needed (I'll add it later)</label>
+                </div>
+            </div>
+
+            <label class="time-input-label">Select Priority</label>
+            <div class="priority-options">
+                <div class="priority-option q1" data-priority="urgent-important">
+                    <div class="priority-icon">🔥</div>
+                    <div class="priority-title">Do First</div>
+                    <div class="priority-desc">Urgent & Important</div>
+                </div>
+                <div class="priority-option q2" data-priority="not-urgent-important">
+                    <div class="priority-icon">📅</div>
+                    <div class="priority-title">Schedule</div>
+                    <div class="priority-desc">Not Urgent but Important</div>
+                </div>
+                <div class="priority-option q3" data-priority="urgent-not-important">
+                    <div class="priority-icon">👥</div>
+                    <div class="priority-title">Delegate</div>
+                    <div class="priority-desc">Urgent but Not Important</div>
+                </div>
+                <div class="priority-option q4" data-priority="not-urgent-not-important">
+                    <div class="priority-icon">🗑️</div>
+                    <div class="priority-title">Eliminate</div>
+                    <div class="priority-desc">Not Urgent & Not Important</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" id="cancelBtn">Cancel</button>
+                <button class="modal-btn confirm" id="confirmBtn" disabled>Add Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
